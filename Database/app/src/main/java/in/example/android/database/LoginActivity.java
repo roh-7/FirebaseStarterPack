@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -92,7 +91,6 @@ public class LoginActivity extends AppCompatActivity
 	{
 		super.onActivityResult(requestCode, resultCode, data);
 		dialog.show();
-		Log.v(TAG, String.valueOf(resultCode));
 		
 		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
 		if (requestCode == RC_SIGN_IN)
