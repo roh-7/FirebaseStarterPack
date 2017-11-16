@@ -1,4 +1,4 @@
-package in.example.android.signin;
+package in.example.android.database;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 
-import com.example.android.signin.R;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
