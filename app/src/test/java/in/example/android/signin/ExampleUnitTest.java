@@ -1,4 +1,4 @@
-package in.edu.siesgst.firebasetry;
+package in.example.android.signin;
 
 import org.junit.Test;
 
