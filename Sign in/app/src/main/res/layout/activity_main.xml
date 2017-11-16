@@ -8,16 +8,16 @@
  tools:context = "in.example.android.signin.LoginActivity">
 
     <com.google.android.gms.common.SignInButton
-     android:id="@+id/login_button"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
+     android:id = "@+id/login_button"
+     android:layout_width = "wrap_content"
+     android:layout_height = "wrap_content"
      android:layout_centerHorizontal = "true"
-     android:layout_centerInParent="true"
+     android:layout_centerInParent = "true"
      android:layout_marginTop = "22dp"
      android:drawablePadding = "4dp"
      android:paddingBottom = "16dp"
      android:paddingLeft = "48dp"
      android:paddingRight = "48dp"
-     android:paddingTop = "16dp"/>
+     android:paddingTop = "16dp" />
 
 </RelativeLayout>

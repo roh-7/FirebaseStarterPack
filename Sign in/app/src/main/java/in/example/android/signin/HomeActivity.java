@@ -57,7 +57,7 @@ public class HomeActivity extends AppCompatActivity
 		profile_url = sessionManager.getProfileUrl();
 		
 		// so that profile pic can be seen from the log itself
-		Log.v(TAG,profile_url);
+		Log.v(TAG, profile_url);
 		
 		display_name.setText(name);
 		display_email.setText(email);

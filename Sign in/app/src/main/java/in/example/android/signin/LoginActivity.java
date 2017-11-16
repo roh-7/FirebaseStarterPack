@@ -31,6 +31,8 @@ public class LoginActivity extends AppCompatActivity
 	SignInButton button;
 	GoogleSignInClient googleSignInClient;
 	ProgressDialog dialog;
+	
+	// Declaration of FirebaseAuth
 	private FirebaseAuth firebaseAuth;
 	private SessionManager sessionManager;
 	
@@ -40,11 +42,13 @@ public class LoginActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		
+		// configuring google sign in
 		GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
 				.requestIdToken(getString(R.string.default_web_client_id))
 				.requestEmail()
 				.build();
 		
+		// initialise FirebaseAuth
 		firebaseAuth = FirebaseAuth.getInstance();
 		
 		dialog = new ProgressDialog(LoginActivity.this);
@@ -75,16 +79,12 @@ public class LoginActivity extends AppCompatActivity
 				}
 			}
 		});
-		
-		
 	}
 	
 	public void signIn()
 	{
-		
 		Intent signInIntent = googleSignInClient.getSignInIntent();
 		startActivityForResult(signInIntent, RC_SIGN_IN);
-		Log.v(TAG, "Sign in hogaya");
 	}
 	
 	
@@ -94,35 +94,37 @@ public class LoginActivity extends AppCompatActivity
 		super.onActivityResult(requestCode, resultCode, data);
 		dialog.show();
 		Log.v(TAG, String.valueOf(resultCode));
-		Log.v(TAG, "in result");
+		
+		// Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
 		if (requestCode == RC_SIGN_IN)
 		{
-			Log.v(TAG, "request code matches");
 			Task<GoogleSignInAccount> signInAccountTask = GoogleSignIn.getSignedInAccountFromIntent(data);
 			try
 			{
+				// Google sign in was successfull.
 				GoogleSignInAccount googleSignInAccount = signInAccountTask.getResult(ApiException.class);
+				// Now authenticating using firebase
 				firebaseAuthWithGoogle(googleSignInAccount);
 			}
 			catch (ApiException e)
 			{
+				// google sign in failed
 				dialog.dismiss();
-				Log.v(TAG, "error: " + e.toString());
-//				e.printStackTrace();
+				e.printStackTrace();
 			}
 		}
 		else
 		{
-			Log.v(TAG, "req code match nahi hua" + String.valueOf(RC_SIGN_IN));
 			dialog.dismiss();
 		}
-		Log.v(TAG, "result over");
 	}
 	
 	@Override
 	protected void onStart()
 	{
 		super.onStart();
+		// To check whether user is already signed in or not
+		// Otherwise implemented using IS_LOGIN key stored in shared preferences and checked in Splash (one of the uses of splash).
 		FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
 		if (mFirebaseUser != null)
 		{
@@ -133,7 +135,6 @@ public class LoginActivity extends AppCompatActivity
 	
 	private void firebaseAuthWithGoogle(final GoogleSignInAccount account)
 	{
-		Log.v(TAG, "firebaseAuthWithGoogle: " + account.getId());
 		AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
 		firebaseAuth.signInWithCredential(credential).addOnCompleteListener(this, new OnCompleteListener<AuthResult>()
 		{
@@ -142,8 +143,8 @@ public class LoginActivity extends AppCompatActivity
 			{
 				if (task.isSuccessful())
 				{
-					// signed in
-					Log.v(TAG, "Signed In");
+					// signed in successfully. Starting custom session using SessionManager and building intent to Home.
+					// *User says i'm in in hacker style*
 					FirebaseUser user = firebaseAuth.getCurrentUser();
 					sessionManager.loginUser(account.getDisplayName(), account.getEmail(), account.getPhotoUrl().toString());
 					startActivity(new Intent(LoginActivity.this, HomeActivity.class));
@@ -151,14 +152,10 @@ public class LoginActivity extends AppCompatActivity
 				}
 				else
 				{
-					Log.v(TAG, "Not Signed In");
 					dialog.dismiss();
 					Snackbar.make(findViewById(R.id.root), "Something went wrong", Snackbar.LENGTH_SHORT).show();
 				}
 			}
 		});
 	}
-	
-	
 }
-
