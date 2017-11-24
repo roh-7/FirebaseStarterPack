@@ -1,4 +1,4 @@
-# FirebaseTry
+# Firebase
 Created multiple projects to be used as samples.
 
 ## To connect your project to firebase.
