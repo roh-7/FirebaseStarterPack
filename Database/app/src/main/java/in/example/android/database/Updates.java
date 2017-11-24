@@ -6,7 +6,7 @@ package in.example.android.database;
 
 public class Updates
 {
-	String title,count;
+	String title, count;
 	
 	public Updates()
 	{
@@ -20,7 +20,7 @@ public class Updates
 	
 	public String getCount()
 	{
-	
+		
 		return count;
 	}
 	

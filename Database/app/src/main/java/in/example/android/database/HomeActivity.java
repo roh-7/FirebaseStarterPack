@@ -39,16 +39,16 @@ public class HomeActivity extends AppCompatActivity
 		
 		reference = FirebaseDatabase.getInstance().getReference();
 		adapter = new FirebaseRecyclerAdapter<Updates, UpdatesViewHolder>(Updates.class,
-				R.layout.updates_item,UpdatesViewHolder.class, reference.child("updates"))
+				R.layout.updates_item, UpdatesViewHolder.class, reference.child("updates"))
 		{
 			@Override
 			protected void populateViewHolder(UpdatesViewHolder viewHolder, Updates model, int position)
 			{
 				viewHolder.update.setText(model.title);
-				Log.v(TAG,"update: "+model.title);
-				Log.v(TAG,"getUpdate: "+model.getTitle());
-				Log.v(TAG,"count: "+model.count);
-				Log.v(TAG,"getCount: "+model.getCount());
+				Log.v(TAG, "update: " + model.title);
+				Log.v(TAG, "getUpdate: " + model.getTitle());
+				Log.v(TAG, "count: " + model.count);
+				Log.v(TAG, "getCount: " + model.getCount());
 				viewHolder.count.setText(model.count);
 			}
 		};

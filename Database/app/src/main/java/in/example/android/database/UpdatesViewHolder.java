@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 public class UpdatesViewHolder extends RecyclerView.ViewHolder
 {
-	public TextView update,count;
+	public TextView update, count;
 	
 	public UpdatesViewHolder(View itemView)
 	{
