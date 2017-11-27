@@ -77,7 +77,7 @@ public class SignUpActivity extends AppCompatActivity
 							public void onComplete(@NonNull Task<Void> task)
 							{
 								Log.v("signup", "child added");
-								sessionManager.loginUser(email_ent,username_ent,role_ent);
+								sessionManager.loginUser(email_ent,username_ent,role_ent,getIntent().getStringExtra("display_name"));
 								startActivity(new Intent(SignUpActivity.this,HomeActivity.class));
 								finish();
 								dialog.dismiss();

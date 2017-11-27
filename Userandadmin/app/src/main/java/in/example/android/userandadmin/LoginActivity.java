@@ -80,6 +80,7 @@ public class LoginActivity extends AppCompatActivity
 				}
 			}
 		});
+		revokeAccess();
 	}
 	
 	public void signIn()
@@ -87,6 +88,19 @@ public class LoginActivity extends AppCompatActivity
 		Intent intent = googleSignInClient.getSignInIntent();
 		startActivityForResult(intent, RC_SIGN_IN);
 	}
+	
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FirebaseUser mFirebaseUser = firebaseAuth.getCurrentUser();
+		if (mFirebaseUser != null)
+		{
+			startActivity(new Intent(this, HomeActivity.class));
+			finish();
+		}
+	}
+	
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
@@ -134,6 +148,8 @@ public class LoginActivity extends AppCompatActivity
 					// *User says i'm in in hacker style*
 					FirebaseUser user = firebaseAuth.getCurrentUser();
 					final String email_chosen = account.getEmail();
+					final String display_name = account.getDisplayName();
+					
 					reference.addValueEventListener(new ValueEventListener()
 					{
 						@Override
@@ -150,11 +166,18 @@ public class LoginActivity extends AppCompatActivity
 									Log.v(TAG, users.email);
 									Log.v(TAG, "count: " + count);
 									Log.v(TAG, "user exists" + account.getEmail());
-									sessionManager.loginUser(account.getEmail(), account.getDisplayName(), users.getRole());
+									sessionManager.loginUser(account.getEmail(), users.getName(), users.getRole(),display_name);
 									startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 									dialog.dismiss();
 									finish();
 								}
+							}
+							// user email has been verified but doesn't have an account
+							if (!sessionManager.isLogin())
+							{
+								Log.v(TAG, "taking user to sign up");
+								startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("email", account.getEmail()).putExtra("display_name",account.getDisplayName()));
+								dialog.dismiss();
 							}
 						}
 						
@@ -164,13 +187,7 @@ public class LoginActivity extends AppCompatActivity
 						
 						}
 					});
-					// user email has been verified but doesn't have an account
-					if (!sessionManager.isLogin())
-					{
-						Log.v(TAG, "taking user to sign up");
-						startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("email", account.getEmail()));
-						dialog.dismiss();
-					}
+					
 				}
 				else
 				{
@@ -179,5 +196,20 @@ public class LoginActivity extends AppCompatActivity
 				}
 			}
 		});
+	}
+	
+	private void revokeAccess()
+	{
+		googleSignInClient.revokeAccess()
+				.addOnCompleteListener(this, new OnCompleteListener<Void>()
+				{
+					@Override
+					public void onComplete(@NonNull Task<Void> task)
+					{
+						// ...
+						
+						new SessionManager(LoginActivity.this).accessRevoked();
+					}
+				});
 	}
 }

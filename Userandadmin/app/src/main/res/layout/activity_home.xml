@@ -1,10 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
  xmlns:android = "http://schemas.android.com/apk/res/android"
  xmlns:tools = "http://schemas.android.com/tools"
  android:layout_width = "match_parent"
  android:layout_height = "wrap_content"
+ android:orientation="vertical"
  tools:context = "in.example.android.userandadmin.HomeActivity">
+	
+	<LinearLayout
+	 android:layout_margin="8dp"
+	 android:layout_width = "wrap_content"
+	 android:layout_height = "wrap_content"
+	 android:orientation = "vertical">
+		
+		<LinearLayout
+		 android:padding="4dp"
+		 android:layout_width = "wrap_content"
+		 android:layout_height = "wrap_content"
+		 android:orientation = "horizontal">
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:text = "Display name: "
+			 android:textSize = "24sp"
+			 />
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:id="@+id/home_display_name"
+			 android:text = "Email.email@email.com"
+			 android:textSize = "20sp"
+			 />
+		</LinearLayout>
+		
+		
+		<LinearLayout
+		 android:padding="4dp"
+		 android:layout_width = "wrap_content"
+		 android:layout_height = "wrap_content"
+		 android:orientation = "horizontal">
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:text = "User name: "
+			 android:textSize = "24sp"
+			 />
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:id="@+id/home_username"
+			 android:text = "Email.email@email.com"
+			 android:textSize = "20sp"
+			 />
+		</LinearLayout>
+		
+		<LinearLayout
+		 android:padding="4dp"
+		 android:layout_width = "wrap_content"
+		 android:layout_height = "wrap_content"
+		 android:orientation = "horizontal">
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:text = "Email: "
+			 android:textSize = "24sp"
+			 />
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:id="@+id/home_email"
+			 android:text = "Email.email@email.com"
+			 android:textSize = "20sp"
+			 />
+		</LinearLayout>
+		
+		<LinearLayout
+		 android:padding="4dp"
+		 android:layout_width = "wrap_content"
+		 android:layout_height = "wrap_content"
+		 android:orientation = "horizontal">
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:text = "Role: "
+			 android:textSize = "24sp"
+			 />
+			
+			<TextView
+			 android:layout_width = "wrap_content"
+			 android:layout_height = "wrap_content"
+			 android:id="@+id/home_role"
+			 android:text = "Email.email@email.com"
+			 android:textSize = "20sp"
+			 />
+		</LinearLayout>
+		
+		
+	</LinearLayout>
 
 	<android.support.v7.widget.CardView
 	 android:layout_width = "match_parent"
@@ -17,4 +116,4 @@
 		
 	</android.support.v7.widget.CardView>
 	
-</RelativeLayout>
+</LinearLayout>

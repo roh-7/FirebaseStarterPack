@@ -6,8 +6,10 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 
+import static in.example.android.userandadmin.Constants.DISPLAY_NAME;
 import static in.example.android.userandadmin.Constants.EMAIL;
 import static in.example.android.userandadmin.Constants.IS_LOGIN;
+import static in.example.android.userandadmin.Constants.REVOKE_ACCESS;
 import static in.example.android.userandadmin.Constants.ROLE;
 import static in.example.android.userandadmin.Constants.USERS;
 import static in.example.android.userandadmin.Constants.USER_NAME;
@@ -43,12 +45,13 @@ public class SessionManager
 		return networkInfo != null && networkInfo.isConnectedOrConnecting();
 	}
 	
-	public void loginUser(String email, String user_name,String role)
+	public void loginUser(String email, String user_name,String role,String display_name)
 	{
 		editor.putString(EMAIL, email);
 		editor.putString(USER_NAME, user_name);
 		editor.putBoolean(IS_LOGIN, true);
 		editor.putString(ROLE,role);
+		editor.putString(DISPLAY_NAME,display_name);
 		editor.apply();
 	}
 	
@@ -56,9 +59,11 @@ public class SessionManager
 	{
 		editor.clear();
 		editor.commit();
-		editor.apply();
 		
 		Intent intent = new Intent(context, LoginActivity.class);
+		editor.putBoolean(REVOKE_ACCESS,true);
+		editor.apply();
+		
 		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 		intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 		context.startActivity(intent);
@@ -93,5 +98,19 @@ public class SessionManager
 	public String getRole()
 	{
 		return sharedPreferences.getString(ROLE,"user");
+	}
+	
+	public boolean checkRevokeAccess(){
+		return sharedPreferences.getBoolean("REVOKE_ACCESS",false);
+	}
+	
+	public void accessRevoked(){
+		editor.putBoolean("REVOKE_ACCESS",false);
+		editor.apply();
+	}
+	
+	public String getDisplayName()
+	{
+		return sharedPreferences.getString(DISPLAY_NAME,"FIRST LAST");
 	}
 }

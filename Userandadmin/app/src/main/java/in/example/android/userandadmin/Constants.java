@@ -14,5 +14,6 @@ public class Constants
 	public static final String IS_LOGIN = "is_login";
 	public static final String USERS = "users";
 	public static final String ROLE = "role";
-	
+	public static final String REVOKE_ACCESS = "revoke_access";
+	public static final String DISPLAY_NAME = "display_name";
 }
