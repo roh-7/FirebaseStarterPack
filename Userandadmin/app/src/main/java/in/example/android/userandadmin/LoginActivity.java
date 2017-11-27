@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,8 +26,6 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import static in.example.android.userandadmin.Constants.TAG;
 
 public class LoginActivity extends AppCompatActivity
 {
@@ -163,9 +160,6 @@ public class LoginActivity extends AppCompatActivity
 								if (email_chosen.equalsIgnoreCase(users.email))
 								{
 									// user already exists
-									Log.v(TAG, users.email);
-									Log.v(TAG, "count: " + count);
-									Log.v(TAG, "user exists" + account.getEmail());
 									sessionManager.loginUser(account.getEmail(), users.getName(), users.getRole(),display_name);
 									startActivity(new Intent(LoginActivity.this, HomeActivity.class));
 									dialog.dismiss();
@@ -175,7 +169,6 @@ public class LoginActivity extends AppCompatActivity
 							// user email has been verified but doesn't have an account
 							if (!sessionManager.isLogin())
 							{
-								Log.v(TAG, "taking user to sign up");
 								startActivity(new Intent(LoginActivity.this, SignUpActivity.class).putExtra("email", account.getEmail()).putExtra("display_name",account.getDisplayName()));
 								dialog.dismiss();
 							}
@@ -206,8 +199,6 @@ public class LoginActivity extends AppCompatActivity
 					@Override
 					public void onComplete(@NonNull Task<Void> task)
 					{
-						// ...
-						
 						new SessionManager(LoginActivity.this).accessRevoked();
 					}
 				});

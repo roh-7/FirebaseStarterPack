@@ -7,8 +7,6 @@ package in.example.android.userandadmin;
 public class Constants
 {
 	public static final String TAG = "LOGTAG";
-	
-	
 	public static final String EMAIL = "email";
 	public static final String USER_NAME = "user_name";
 	public static final String IS_LOGIN = "is_login";

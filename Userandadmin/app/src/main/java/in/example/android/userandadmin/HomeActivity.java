@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,8 +35,6 @@ public class HomeActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_home);
-		
-		Log.v(Constants.TAG, "home");
 		role = findViewById(R.id.home_role);
 		email = findViewById(R.id.home_email);
 		username = findViewById(R.id.home_username);
@@ -48,7 +45,6 @@ public class HomeActivity extends AppCompatActivity
 		username.setText(sessionManager.getUserName());
 		displayname.setText(sessionManager.getDisplayName());
 		recyclerView = (RecyclerView) findViewById(R.id.users_recycler);
-		
 		recyclerView.setVisibility(View.GONE);
 		reference = FirebaseDatabase.getInstance().getReference("/users");
 		Query query = reference.orderByChild("email").equalTo(sessionManager.getEmail());
@@ -57,17 +53,13 @@ public class HomeActivity extends AppCompatActivity
 			@Override
 			public void onDataChange(DataSnapshot dataSnapshot)
 			{
-				Log.v(Constants.TAG, "i");
 				if (dataSnapshot.toString().contains("admin"))
 				{
 					if (dataSnapshot.getValue() != null)
 					{
-						Log.v(Constants.TAG, "in");
-						
 						recyclerView.setVisibility(View.VISIBLE);
 						linearLayoutManager = new LinearLayoutManager(HomeActivity.this);
 						recyclerView.setLayoutManager(linearLayoutManager);
-						
 						adapter = new FirebaseRecyclerAdapter<Users, UsersViewHolder>(Users.class,
 								R.layout.user_item, UsersViewHolder.class, reference)
 						{
@@ -80,7 +72,6 @@ public class HomeActivity extends AppCompatActivity
 							}
 						};
 						recyclerView.setAdapter(adapter);
-						
 					}
 				}
 				else
@@ -96,7 +87,6 @@ public class HomeActivity extends AppCompatActivity
 			
 			}
 		});
-		
 		
 	}
 	
