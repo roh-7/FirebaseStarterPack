@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -155,6 +156,7 @@ public class LoginActivity extends AppCompatActivity
 							for (DataSnapshot snapshot : dataSnapshot.getChildren())
 							{
 								Long count = dataSnapshot.getChildrenCount();
+								Log.v("count",count.toString());
 								sessionManager.setUserCount(count);
 								Users users = snapshot.getValue(Users.class);
 								if (email_chosen.equalsIgnoreCase(users.email))
