@@ -7,3 +7,6 @@ Created multiple projects to be used as samples.
 3. Expand any one of the modules and click the connect to firebase button and you're good to go.
 
 [Click here for firebase docs](https://firebase.google.com/docs/android/setup)
+
+## Contributors:
+#### [Rohit Ramaswamy](https://github.com/roh-7)
