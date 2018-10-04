@@ -8,5 +8,5 @@ Created multiple projects to be used as samples.
 
 [Click here for firebase docs](https://firebase.google.com/docs/android/setup)
 
-Contributors:
+## Contributors:
 #### [Rohit Ramaswamy](https://github.com/roh-7)
